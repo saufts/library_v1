@@ -1,0 +1,45 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-areas: 
+  "header header"
+  "content sidebar";
+  grid-template-columns: 5fr 1fr;
+}
+
+.header {
+  grid-area: header;
+  background-color: lightblue;
+}
+
+.content {
+  grid-area: content;
+  background-color: lightgray;
+
+}
+
+.book-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: 250px;
+  padding-bottom: 2rem;
+  justify-content: flex-end;
+  justify-items: flex-start;
+  align-items: flex-start;
+}
+
+.book-card {
+  background-color: peru;
+  border-left: 10px solid rgb(255, 197, 91);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 250px;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: greenyellow;
+}
