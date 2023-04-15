@@ -11,23 +11,24 @@
   <!-- Header -->
   <div class="header">
     <h1>My Library</h1>
+
   </div>
 
   <!-- Body -->
   <div class="content">
     <div class="book-cards">
       <div class="book-card">
-        <h3 class="author">J.K. Rowling</p>
-        <p class="title">Harry Potter</p>
-        <p class="pages">300</p>
-        <p class="status">Read</p>
+        <h3 class="title">Title: Harry Potter</h3>
+        <p class="author">Author: J.K. Rowling</p>
+        <p class="pages">Pages: 300</p>
+        <p class="status">Status: Read</p>
       </div>
   
       <div class="book-card">
-        <p class="author">G.W. Martin</p>
-        <p class="title">Game of thrones</p>
-        <p class="pages">600</p>
-        <p class="status">Read</p>
+        <h3 class="title">Title: Game of thrones</h3>
+        <p class="author">Author: G.W. Martin</p>
+        <p class="pages">Pages: 600</p>
+        <p class="status">Status: Read</p>
       </div>
     </div>
     
@@ -35,7 +36,22 @@
 
   <!-- sideBar -->
   <div class="sidebar">
-    <button class="add">+</button>
+    <button class="btn-add">+</button>
+  </div>
+
+  <div id="form-add-book">
+    <form action="post">
+      <label for="book-title">Title:<br></label>
+      <input type="text" id='book-title' placeholder='title'>
+      <label for="book-author"><br>Author:<br></label>
+      <input type="text" id='book-author' placeholder='author'>
+      <label for="book-pages"><br>Pages:<br></label>
+      <input type="text" id='book-pages' placeholder='pages'>
+      <div class="check">
+        <input type="checkbox" id='read-status-check'>
+        <label for="read-status-check">Read?</label>
+      </div>
+    </form>
   </div>
 
 </body>
