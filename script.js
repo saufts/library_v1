@@ -8,13 +8,17 @@ let cardPages = document.querySelector('.pages');
 let cardStatus = document.querySelector('.status');
 
 const btnAdd = document.querySelector('.btn-add');
+const btnClose = document.querySelector('.form-exit');
 const formAdd = document.querySelector('#form-add-book');
 
 
 
 btnAdd.addEventListener('click', () => {
-  // document.getElementById('#book-add-form').style.display = block;
-  formAdd.style.display = 'block';
+  formAdd.style.display = 'flex';
+});
+
+btnClose.addEventListener('click', () => {
+  formAdd.style.display = 'none';
 });
 
 function Book(title, author, pages, status) {
