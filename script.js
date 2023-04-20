@@ -40,11 +40,11 @@ btnSubmit.addEventListener('click', () => {
 
 });
 
-function Book(title, author, pages, status) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.status = status;
+  this.read = read;
 }
 
 function createBookElement(el, className, content) {
@@ -55,20 +55,32 @@ function createBookElement(el, className, content) {
   return element;
 }
 
-function createReadElement(el, type, content) {
-  const element = document.createElement(el);
-  element.setAttribute('type', type);
-  element.setAttribute('id', 'read-status');
-  
-  let label = document.createElement('label');
+function createReadElement(bookItem, book) {
+  let read = document.createElement('div');
+  read.setAttribute('class', 'book-read');
+  read.appendChild(createBookElement('h3', 'book-read-status', 'Read?'));
+  let input = document.createElement('input');
+  input.type = 'checkbox';
+  input.addEventListener('click', (e) => {
+    if (e.target.checked) {
+      bookItem.setAttribute('class', "book-card read-checked");
+      book.read = true;
+    } else {
+      bookItem.setAttribute('class', 'book-card not-read');
+      book.read = false;
+    }
+  });
 
-  label.setAttribute('for', 'read-status');
-  label.textContent = 'Read?';
-  element.appendChild(label);
-  
-  
+  if(book.read) {
+    input.checked = true;
+    bookItem.setAttribute('class', 'book-card read-checked');
+  } else {
+    input.checked = false;
+  }
 
-  return element;
+  read.appendChild(input);
+  return read;
+
 }
 
 function createBookItem(book, index) {
@@ -81,10 +93,11 @@ function createBookItem(book, index) {
   bookItem.appendChild(createBookElement('h3', 'title', `Title: ${book.title}`));
   bookItem.appendChild(createBookElement('p', 'author', `Author: ${book.author}`));
   bookItem.appendChild(createBookElement('p', 'title', `Pages: ${book.pages}`));
-  //bookItem.appendChild(createReadElement('input', 'checkbox', `Read? ${book.status}`));
+  // bookItem.appendChild(createReadElement('input', 'checkbox', `Read? ${book.status}`));
+  bookItem.appendChild(createReadElement(bookItem, book));
 
 
-  bookItem.appendChild(createReadElement('input', 'checkbox', 'test'));
+  
 
   bookContainer.insertAdjacentElement("afterbegin", bookItem);
 
