@@ -39,6 +39,14 @@ btnSubmit.addEventListener('click', () => {
   myLibrary.push(newBook);
   renderBooks();
 
+  formTitle.value = '';
+  formAuthor.value = '';
+  formPages.value = '';
+  formReadStatus.checked = false;
+
+  formAdd.style.display = 'none';
+
+
 });
 
 function Book(title, author, pages, read) {
