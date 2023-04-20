@@ -17,19 +17,7 @@
   <!-- Body -->
   <div class="content">
     <div class="book-cards">
-      <div class="book-card">
-        <h3 class="title">Title: Harry Potter</h3>
-        <p class="author">Author: J.K. Rowling</p>
-        <p class="pages">Pages: 300</p>
-        <p class="status">Status: Read</p>
-      </div>
-  
-      <div class="book-card">
-        <h3 class="title">Title: Game of thrones</h3>
-        <p class="author">Author: G.W. Martin</p>
-        <p class="pages">Pages: 600</p>
-        <p class="status">Status: Read</p>
-      </div>
+      
     </div>
     
   </div>
@@ -44,18 +32,17 @@
     <h1 class="form-title">Add a new book</h1>
     <form action="post">
       <label for="book-title">Title:<br></label>
-      <input type="text" id='book-title' placeholder='title'>
+      <input type="text" id='form-book-title' placeholder='title'>
       <label for="book-author"><br>Author:<br></label>
-      <input type="text" id='book-author' placeholder='author'>
+      <input type="text" id='form-book-author' placeholder='author'>
       <label for="book-pages"><br>Pages:<br></label>
-      <input type="text" id='book-pages' placeholder='pages'>
+      <input type="text" id='form-book-pages' placeholder='pages'>
       <div class="check">
         <input type="checkbox" id='read-status-check'>
         <label for="read-status-check">Read?</label>
       </div>
-      <input type="submit">
-    </form>  
-    </button>
+    </form> 
+    <input type="submit" class='btn form-submit'> 
   </div>
 
 </body>
