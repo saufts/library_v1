@@ -20,6 +20,7 @@ const formTitle = document.querySelector('#form-book-title');
 const formPages = document.querySelector('#form-book-pages');
 const formReadStatus = document.querySelector('#read-status-check');
 
+
 btnAdd.addEventListener('click', () => {
   formAdd.style.display = 'flex';
 });
@@ -32,7 +33,7 @@ btnSubmit.addEventListener('click', () => {
   let newTitle = formTitle.value;
   let newAuthor = formAuthor.value;
   let newPages = formPages.value;
-  let newReadStatus = formReadStatus.value;
+  let newReadStatus = formReadStatus.checked; // solved the problem - .checked instead of .value
 
   let newBook = new Book(newTitle, newAuthor, newPages, newReadStatus);
   myLibrary.push(newBook);
@@ -66,8 +67,9 @@ function createReadElement(bookItem, book) {
       bookItem.setAttribute('class', "book-card read-checked");
       book.read = true;
     } else {
-      bookItem.setAttribute('class', 'book-card not-read');
+      bookItem.setAttribute('class', 'book-card read-unchecked');
       book.read = false;
+      input.checked = false;
     }
   });
 
@@ -104,6 +106,7 @@ function createBookItem(book, index) {
 }
 
 function renderBooks() {
+  bookCards.textContent = '';
   myLibrary.map((book, index) => {
     createBookItem(book, index);
   });
