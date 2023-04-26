@@ -3,12 +3,7 @@ let myLibrary = [];
 const btn = document.querySelector(".add");
 
 const bookCards = document.querySelector(".book-cards");
-
-let cardAuthor = document.querySelector('.author');
-let cardTitle = document.querySelector('.title');
-let cardPages = document.querySelector('.pages');
-let cardStatus = document.querySelector('.status');
-let bookContainer = document.querySelector('.book-cards');
+const bookContainer = document.querySelector('.book-cards');
 
 const btnAdd = document.querySelector('.btn-add');
 const btnClose = document.querySelector('.form-exit');
@@ -37,6 +32,7 @@ btnSubmit.addEventListener('click', () => {
 
   let newBook = new Book(newTitle, newAuthor, newPages, newReadStatus);
   myLibrary.push(newBook);
+  
   renderBooks();
 
   formTitle.value = '';
@@ -100,14 +96,14 @@ function createBookItem(book, index) {
   bookItem.setAttribute('key', index);
   bookItem.setAttribute('class', 'book-card');
 
+  bookItem.appendChild(createBookElement("button", "btn delete", "X"));
   bookItem.appendChild(createBookElement('h3', 'title', `Title: ${book.title}`));
   bookItem.appendChild(createBookElement('p', 'author', `Author: ${book.author}`));
   bookItem.appendChild(createBookElement('p', 'title', `Pages: ${book.pages}`));
-  // bookItem.appendChild(createReadElement('input', 'checkbox', `Read? ${book.status}`));
+
   bookItem.appendChild(createReadElement(bookItem, book));
 
-
-  
+  bookItem.appendChild(createBookElement("button", "btn edit", "edit"));
 
   bookContainer.insertAdjacentElement("afterbegin", bookItem);
 
@@ -118,6 +114,11 @@ function renderBooks() {
   myLibrary.map((book, index) => {
     createBookItem(book, index);
   });
+}
+
+function deleteBook(index) {
+  myLibrary.splice(index,1);
+  renderBooks();
 }
 
 renderBooks();
