@@ -17,8 +17,6 @@ input {
   margin: 5px;
 }
 
-
-
 .header {
   grid-area: header;
   background-color: lightblue;
@@ -44,12 +42,17 @@ input {
   background-color: peru;
   border-left: 10px solid rgb(255, 197, 91);
   border-radius: 4px;
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
   padding: 10px;
   width: 250px;
   margin: 10px;
   
+}
+
+.delete {
+  align-self: flex-end;
+  height: 20px;
 }
 
 .read-unchecked {
