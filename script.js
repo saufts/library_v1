@@ -108,6 +108,9 @@ function createBookItem(book, index) {
 
   bookContainer.insertAdjacentElement("afterbegin", bookItem);
 
+  bookItem.querySelector('.delete').addEventListener('click', () => {
+    deleteBook(index);
+  });
 }
 
 function renderBooks() {
