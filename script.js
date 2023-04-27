@@ -6,13 +6,9 @@ const bookCards = document.querySelector(".book-cards");
 const bookContainer = document.querySelector('.book-cards');
 
 const btnAdd = document.querySelector('.btn-add');
-const btnCloseAddForm = document.querySelector('.form-add-exit');
-const btnCloseEditForm = document.querySelector('.form-edit-exit');
-
-
+const btnClose = document.querySelector('.form-exit');
 const btnSubmit = document.querySelector('.form-submit');
 const formAdd = document.querySelector('#form-add-book');
-const formEdit = document.querySelector('#form-edit-book');
 
 const formAuthor = document.querySelector('#form-book-author');
 const formTitle = document.querySelector('#form-book-title');
@@ -24,16 +20,9 @@ btnAdd.addEventListener('click', () => {
   formAdd.style.display = 'flex';
 });
 
-btnCloseAddForm.addEventListener('click', () => {
+btnClose.addEventListener('click', () => {
   clearFormFields();
   formAdd.style.display = 'none';
-
-});
-
-btnCloseEditForm.addEventListener('click', () => {
-  clearFormFields();
-  formEdit.style.display = 'none';
-
 });
 
 btnSubmit.addEventListener('click', () => {
@@ -102,6 +91,8 @@ function createReadElement(bookItem, book) {
 function createBookItem(book, index) {
   const bookItem = document.createElement('div');
 
+  // bookItem.setAttribute('id', index);
+  // bookItem.setAttribute('key', index);
   bookItem.setAttribute('class', 'book-card');
 
   bookItem.appendChild(createBookElement("button", "btn delete", "X"));
@@ -137,17 +128,32 @@ function deleteBook(index) {
 }
 
 function editBook(index) {
-
   console.log(myLibrary[index]);
-  formEdit.style.display = 'flex';
+  formAdd.style.display = 'flex';
 
-  editBookBtn = document.querySelector('.form-edit');
-  editBookBtn.value = 'EDIT';
+
+  if(btnSubmit.classList.contains('form-submit')) {
+    document.querySelector('.form-submit').setAttribute('class', 'form-edit');
+    btnEdit = document.querySelector('.form-edit');
+    btnEdit.value = 'EDIT';
+  }
 
   formTitle.value = myLibrary[index].title;
   formAuthor.value = myLibrary[index].author;
   formPages.value = myLibrary[index].pages;
   formReadStatus.checked = myLibrary[index].read;
+
+  btnEdit.addEventListener('click', () => {
+    if(btnSubmit.classList.contains('form-edit')) {
+
+      document.querySelector('.form-edit').setAttribute('class', 'form-submit');
+      btnSubmit.value = 'submit';
+
+      myLibrary[index].title = formTitle.value;
+      renderBooks();
+
+    } 
+  });
 
 }
 
