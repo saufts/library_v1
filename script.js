@@ -6,9 +6,13 @@ const bookCards = document.querySelector(".book-cards");
 const bookContainer = document.querySelector('.book-cards');
 
 const btnAdd = document.querySelector('.btn-add');
-const btnClose = document.querySelector('.form-exit');
+const btnCloseAddForm = document.querySelector('.form-add-exit');
+const btnCloseEditForm = document.querySelector('.form-edit-exit');
+
+
 const btnSubmit = document.querySelector('.form-submit');
 const formAdd = document.querySelector('#form-add-book');
+const formEdit = document.querySelector('#form-edit-book');
 
 const formAuthor = document.querySelector('#form-book-author');
 const formTitle = document.querySelector('#form-book-title');
@@ -20,8 +24,16 @@ btnAdd.addEventListener('click', () => {
   formAdd.style.display = 'flex';
 });
 
-btnClose.addEventListener('click', () => {
+btnCloseAddForm.addEventListener('click', () => {
+  clearFormFields();
   formAdd.style.display = 'none';
+
+});
+
+btnCloseEditForm.addEventListener('click', () => {
+  clearFormFields();
+  formEdit.style.display = 'none';
+
 });
 
 btnSubmit.addEventListener('click', () => {
@@ -35,10 +47,7 @@ btnSubmit.addEventListener('click', () => {
   
   renderBooks();
 
-  formTitle.value = '';
-  formAuthor.value = '';
-  formPages.value = '';
-  formReadStatus.checked = false;
+  clearFormFields();
 
   formAdd.style.display = 'none';
 
@@ -50,7 +59,7 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.id = Math.floor(Math.random() * 1000000);
+  // this.id = Math.floor(Math.random() * 1000000);
 }
 
 function createBookElement(el, className, content) {
@@ -93,8 +102,6 @@ function createReadElement(bookItem, book) {
 function createBookItem(book, index) {
   const bookItem = document.createElement('div');
 
-  bookItem.setAttribute('id', index);
-  bookItem.setAttribute('key', index);
   bookItem.setAttribute('class', 'book-card');
 
   bookItem.appendChild(createBookElement("button", "btn delete", "X"));
@@ -111,6 +118,10 @@ function createBookItem(book, index) {
   bookItem.querySelector('.delete').addEventListener('click', () => {
     deleteBook(index);
   });
+
+  bookItem.querySelector('.edit').addEventListener('click', () => {
+    editBook(index);
+  })
 }
 
 function renderBooks() {
@@ -125,4 +136,24 @@ function deleteBook(index) {
   renderBooks();
 }
 
-renderBooks();
+function editBook(index) {
+
+  console.log(myLibrary[index]);
+  formEdit.style.display = 'flex';
+
+  editBookBtn = document.querySelector('.form-edit');
+  editBookBtn.value = 'EDIT';
+
+  formTitle.value = myLibrary[index].title;
+  formAuthor.value = myLibrary[index].author;
+  formPages.value = myLibrary[index].pages;
+  formReadStatus.checked = myLibrary[index].read;
+
+}
+
+function clearFormFields() {
+  formTitle.value = '';
+  formAuthor.value = '';
+  formPages.value = '';
+  formReadStatus.checked = false;
+}
