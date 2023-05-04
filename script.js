@@ -8,6 +8,7 @@ const bookContainer = document.querySelector('.book-cards');
 const btnAdd = document.querySelector('.btn-add');
 const btnClose = document.querySelector('.form-exit');
 const btnSubmit = document.querySelector('.form-submit');
+btnEdit = document.querySelector('.form-edit');
 const formAdd = document.querySelector('#form-add-book');
 
 const formAuthor = document.querySelector('#form-book-author');
@@ -15,32 +16,46 @@ const formTitle = document.querySelector('#form-book-title');
 const formPages = document.querySelector('#form-book-pages');
 const formReadStatus = document.querySelector('#read-status-check');
 
+// check whether a new book is going to be added or edited
+// let isNew = false;
+
 
 btnAdd.addEventListener('click', () => {
   formAdd.style.display = 'flex';
+  // isNew = true;
+  btnEdit.style.display = 'none';
+  btnSubmit.style.display = 'block';
 });
 
 btnClose.addEventListener('click', () => {
   clearFormFields();
   formAdd.style.display = 'none';
+
 });
 
 btnSubmit.addEventListener('click', () => {
-  let newTitle = formTitle.value;
-  let newAuthor = formAuthor.value;
-  let newPages = formPages.value;
-  let newReadStatus = formReadStatus.checked; // solved the problem - .checked instead of .value
 
-  let newBook = new Book(newTitle, newAuthor, newPages, newReadStatus);
-  myLibrary.push(newBook);
-  
-  renderBooks();
+  // if (isNew) {
+    let newTitle = formTitle.value;
+    let newAuthor = formAuthor.value;
+    let newPages = formPages.value;
+    let newReadStatus = formReadStatus.checked; // solved the problem - .checked instead of .value
 
-  clearFormFields();
+    let newBook = new Book(newTitle, newAuthor, newPages, newReadStatus);
+    myLibrary.push(newBook);
+    
+    renderBooks();
 
-  formAdd.style.display = 'none';
+    clearFormFields();
 
+    formAdd.style.display = 'none';
+    // isNew = false;
+  // 
 
+  // else {
+  //   myLibrary[index].title = formTitle.value;
+  //   renderBooks();
+  // }
 });
 
 function Book(title, author, pages, read) {
@@ -128,15 +143,11 @@ function deleteBook(index) {
 }
 
 function editBook(index) {
+  
   console.log(myLibrary[index]);
   formAdd.style.display = 'flex';
-
-
-  if(btnSubmit.classList.contains('form-submit')) {
-    document.querySelector('.form-submit').setAttribute('class', 'form-edit');
-    btnEdit = document.querySelector('.form-edit');
-    btnEdit.value = 'EDIT';
-  }
+  btnEdit.style.display = 'block';
+  btnSubmit.style.display = 'none';
 
   formTitle.value = myLibrary[index].title;
   formAuthor.value = myLibrary[index].author;
@@ -144,15 +155,9 @@ function editBook(index) {
   formReadStatus.checked = myLibrary[index].read;
 
   btnEdit.addEventListener('click', () => {
-    if(btnSubmit.classList.contains('form-edit')) {
-
-      document.querySelector('.form-edit').setAttribute('class', 'form-submit');
-      btnSubmit.value = 'submit';
 
       myLibrary[index].title = formTitle.value;
       renderBooks();
-
-    } 
   });
 
 }
