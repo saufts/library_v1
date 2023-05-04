@@ -36,6 +36,7 @@ input {
   justify-content: flex-end;
   justify-items: flex-start;
   align-items: flex-start;
+  gap: 70px
 }
 
 .book-card {
@@ -47,7 +48,6 @@ input {
   padding: 10px;
   width: 250px;
   margin: 10px;
-  
 }
 
 .delete {
@@ -85,6 +85,23 @@ input {
   transform: translate(-50%, -50%);
 }
 
+/* #form-edit-book {
+  display: none;
+  position: fixed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 400px;
+  background-color: goldenrod;
+  margin: 10px;
+  z-index: 1;
+  /* three properties below set in order to center the form div */
+  /* top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */ 
+
 .form-exit {
   align-self: flex-end;
   margin-right: 10px;
@@ -93,5 +110,9 @@ input {
 .form-submit {
   align-self: center;
   margin-bottom: 10px;
+}
+
+.form-edit {
+  display: none;
 }
 
