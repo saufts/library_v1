@@ -119,10 +119,6 @@ function createBookItem(book, index) {
     deleteBook(index);
   });
 
-  // bookItem.querySelector('.edit-book').addEventListener('click', () => {
-  //   editBook(index);
-  // });
-
   const btnEditBook = bookItem.querySelector('.edit-book');
 
   btnEditBook.addEventListener('click', (e) => {
@@ -135,63 +131,8 @@ function createBookItem(book, index) {
       currIndex = index;
       currBook = book;
 
-      // editBook(currBook, currIndex);
-      // isEdited = false;
-      console.log(currBook.id);
-      // console.log(myLibrary[index]);
-      formAdd.style.display = 'flex';
-      btnEdit.style.display = 'block';
-      btnEdit.value = 'edit Book';
-      btnSubmit.style.display = 'none';
-    
-      formTitle.value = currBook.title;
-      formAuthor.value = currBook.author;
-      formPages.value = currBook.pages;
-      formReadStatus.checked = currBook.read;
-    
-      btnEdit.addEventListener('click', () => {
-          // console.log(index);
-          // if(isEdited) {
-          //   myLibrary[index].title = formTitle.value;
-          //   myLibrary[index].author = formAuthor.value;
-          //   myLibrary[index].pages = formPages.value;
-          //   myLibrary[index].read = formReadStatus.checked;
-          //   formAdd.style.display = 'none';
-          //   isEdited = false;
-          //   console.log(book.id);
-          //   console.log(index);
-          // }
-    
-          if(isEdited) {
-            currBook.title = formTitle.value;
-            currBook.author = formAuthor.value;
-            currBook.pages = formPages.value;
-            currBook.read = formReadStatus.checked;
-            formAdd.style.display = 'none';
-            console.log(currBook.id);
-            console.log(currIndex);
-            isEdited = false;
-          }
-    
-          // clearFormFields();
-          renderBooks();
-      });
-    
-    }
-
-  });
-  return bookItem;
-}
-
-
-function deleteBook(index) {
-  myLibrary.splice(index,1);
-  renderBooks();
-}
-
-function editBook(currBook, currIndex) {
-  console.log(currBook.id);
-  // console.log(myLibrary[index]);
+       console.log(currBook.id);
+  
   formAdd.style.display = 'flex';
   btnEdit.style.display = 'block';
   btnEdit.value = 'edit Book';
@@ -203,17 +144,6 @@ function editBook(currBook, currIndex) {
   formReadStatus.checked = currBook.read;
 
   btnEdit.addEventListener('click', () => {
-      // console.log(index);
-      // if(isEdited) {
-      //   myLibrary[index].title = formTitle.value;
-      //   myLibrary[index].author = formAuthor.value;
-      //   myLibrary[index].pages = formPages.value;
-      //   myLibrary[index].read = formReadStatus.checked;
-      //   formAdd.style.display = 'none';
-      //   isEdited = false;
-      //   console.log(book.id);
-      //   console.log(index);
-      // }
 
       if(isEdited) {
         currBook.title = formTitle.value;
@@ -221,16 +151,54 @@ function editBook(currBook, currIndex) {
         currBook.pages = formPages.value;
         currBook.read = formReadStatus.checked;
         formAdd.style.display = 'none';
-        console.log(currBook.id);
-        console.log(currIndex);
         isEdited = false;
       }
 
-      // clearFormFields();
       renderBooks();
   });
 
+    }
+
+  })
+  return bookItem;
 }
+
+
+function deleteBook(index) {
+  myLibrary.splice(index,1);
+  renderBooks();
+}
+
+// function editBook(currBook, currIndex) {
+
+//   formAdd.style.display = 'flex';
+//   btnEdit.style.display = 'block';
+//   btnEdit.value = 'edit Book';
+//   btnSubmit.style.display = 'none';
+
+//   formTitle.value = currBook.title;
+//   formAuthor.value = currBook.author;
+//   formPages.value = currBook.pages;
+//   formReadStatus.checked = currBook.read;
+
+//   btnEdit.addEventListener('click', () => {
+
+//       if(isEdited) {
+//         currBook.title = formTitle.value;
+//         currBook.author = formAuthor.value;
+//         currBook.pages = formPages.value;
+//         currBook.read = formReadStatus.checked;
+//         formAdd.style.display = 'none';
+//         console.log(currBook.id);
+//         console.log(currIndex);
+//         isEdited = false;
+//       }
+
+//       // clearFormFields();
+//       renderBooks();
+//   });
+
+// }
 
 function clearFormFields() {
   formTitle.value = '';
