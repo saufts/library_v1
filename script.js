@@ -8,7 +8,7 @@ const bookContainer = document.querySelector('.book-cards');
 const btnAdd = document.querySelector('.btn-add');
 const btnClose = document.querySelector('.form-exit');
 const btnSubmit = document.querySelector('.form-submit');
-btnEdit = document.querySelector('.form-edit');
+const btnEdit = document.querySelector('.form-edit');
 const formAdd = document.querySelector('#form-add-book');
 
 const formAuthor = document.querySelector('#form-book-author');
@@ -16,26 +16,26 @@ const formTitle = document.querySelector('#form-book-title');
 const formPages = document.querySelector('#form-book-pages');
 const formReadStatus = document.querySelector('#read-status-check');
 
-// check whether a new book is going to be added or edited
-// let isNew = false;
+let isButtonCreated = false;
+let isEdited = false;
 
+let currIndex;
+let currBook;
 
 btnAdd.addEventListener('click', () => {
   formAdd.style.display = 'flex';
-  // isNew = true;
   btnEdit.style.display = 'none';
   btnSubmit.style.display = 'block';
+  clearFormFields();
 });
 
 btnClose.addEventListener('click', () => {
   clearFormFields();
   formAdd.style.display = 'none';
-
 });
 
 btnSubmit.addEventListener('click', () => {
 
-  // if (isNew) {
     let newTitle = formTitle.value;
     let newAuthor = formAuthor.value;
     let newPages = formPages.value;
@@ -49,13 +49,6 @@ btnSubmit.addEventListener('click', () => {
     clearFormFields();
 
     formAdd.style.display = 'none';
-    // isNew = false;
-  // 
-
-  // else {
-  //   myLibrary[index].title = formTitle.value;
-  //   renderBooks();
-  // }
 });
 
 function Book(title, author, pages, read) {
@@ -63,7 +56,7 @@ function Book(title, author, pages, read) {
   this.author = author;
   this.pages = pages;
   this.read = read;
-  // this.id = Math.floor(Math.random() * 1000000);
+  this.id = Math.floor(Math.random() * 1000000);
 }
 
 function createBookElement(el, className, content) {
@@ -106,8 +99,8 @@ function createReadElement(bookItem, book) {
 function createBookItem(book, index) {
   const bookItem = document.createElement('div');
 
-  // bookItem.setAttribute('id', index);
-  // bookItem.setAttribute('key', index);
+  bookItem.setAttribute('id', index);
+  bookItem.setAttribute('key', index);
   bookItem.setAttribute('class', 'book-card');
 
   bookItem.appendChild(createBookElement("button", "btn delete", "X"));
@@ -117,7 +110,8 @@ function createBookItem(book, index) {
 
   bookItem.appendChild(createReadElement(bookItem, book));
 
-  bookItem.appendChild(createBookElement("button", "btn edit", "edit"));
+  bookItem.appendChild(createBookElement("button", "edit-book", "edit"));
+  isButtonCreated = true;
 
   bookContainer.insertAdjacentElement("afterbegin", bookItem);
 
@@ -125,38 +119,114 @@ function createBookItem(book, index) {
     deleteBook(index);
   });
 
-  bookItem.querySelector('.edit').addEventListener('click', () => {
-    editBook(index);
-  })
+  // bookItem.querySelector('.edit-book').addEventListener('click', () => {
+  //   editBook(index);
+  // });
+
+  const btnEditBook = bookItem.querySelector('.edit-book');
+
+  btnEditBook.addEventListener('click', (e) => {
+    isEdited = true;
+
+    if(isEdited) {
+      console.log(book.id);
+      console.log(index);
+      
+      currIndex = index;
+      currBook = book;
+
+      // editBook(currBook, currIndex);
+      // isEdited = false;
+      console.log(currBook.id);
+      // console.log(myLibrary[index]);
+      formAdd.style.display = 'flex';
+      btnEdit.style.display = 'block';
+      btnEdit.value = 'edit Book';
+      btnSubmit.style.display = 'none';
+    
+      formTitle.value = currBook.title;
+      formAuthor.value = currBook.author;
+      formPages.value = currBook.pages;
+      formReadStatus.checked = currBook.read;
+    
+      btnEdit.addEventListener('click', () => {
+          // console.log(index);
+          // if(isEdited) {
+          //   myLibrary[index].title = formTitle.value;
+          //   myLibrary[index].author = formAuthor.value;
+          //   myLibrary[index].pages = formPages.value;
+          //   myLibrary[index].read = formReadStatus.checked;
+          //   formAdd.style.display = 'none';
+          //   isEdited = false;
+          //   console.log(book.id);
+          //   console.log(index);
+          // }
+    
+          if(isEdited) {
+            currBook.title = formTitle.value;
+            currBook.author = formAuthor.value;
+            currBook.pages = formPages.value;
+            currBook.read = formReadStatus.checked;
+            formAdd.style.display = 'none';
+            console.log(currBook.id);
+            console.log(currIndex);
+            isEdited = false;
+          }
+    
+          // clearFormFields();
+          renderBooks();
+      });
+    
+    }
+
+  });
+  return bookItem;
 }
 
-function renderBooks() {
-  bookCards.textContent = '';
-  myLibrary.map((book, index) => {
-    createBookItem(book, index);
-  });
-}
 
 function deleteBook(index) {
   myLibrary.splice(index,1);
   renderBooks();
 }
 
-function editBook(index) {
-  
-  console.log(myLibrary[index]);
+function editBook(currBook, currIndex) {
+  console.log(currBook.id);
+  // console.log(myLibrary[index]);
   formAdd.style.display = 'flex';
   btnEdit.style.display = 'block';
+  btnEdit.value = 'edit Book';
   btnSubmit.style.display = 'none';
 
-  formTitle.value = myLibrary[index].title;
-  formAuthor.value = myLibrary[index].author;
-  formPages.value = myLibrary[index].pages;
-  formReadStatus.checked = myLibrary[index].read;
+  formTitle.value = currBook.title;
+  formAuthor.value = currBook.author;
+  formPages.value = currBook.pages;
+  formReadStatus.checked = currBook.read;
 
   btnEdit.addEventListener('click', () => {
+      // console.log(index);
+      // if(isEdited) {
+      //   myLibrary[index].title = formTitle.value;
+      //   myLibrary[index].author = formAuthor.value;
+      //   myLibrary[index].pages = formPages.value;
+      //   myLibrary[index].read = formReadStatus.checked;
+      //   formAdd.style.display = 'none';
+      //   isEdited = false;
+      //   console.log(book.id);
+      //   console.log(index);
+      // }
 
-      myLibrary[index].title = formTitle.value;
+      if(isEdited) {
+        currBook.title = formTitle.value;
+        currBook.author = formAuthor.value;
+        currBook.pages = formPages.value;
+        currBook.read = formReadStatus.checked;
+        formAdd.style.display = 'none';
+        console.log(currBook.id);
+        console.log(currIndex);
+        isEdited = false;
+      }
+
+      // clearFormFields();
       renderBooks();
   });
 
@@ -168,3 +238,13 @@ function clearFormFields() {
   formPages.value = '';
   formReadStatus.checked = false;
 }
+
+  
+
+  function renderBooks() {
+    bookCards.textContent = '';
+    isEdited = false;
+    myLibrary.map((book, index) => {
+      createBookItem(book, index);
+    });
+  }
