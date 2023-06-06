@@ -1,4 +1,4 @@
-let myLibrary = [];
+glet myLibrary = [];
 
 const btn = document.querySelector(".add");
 
