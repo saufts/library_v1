@@ -169,36 +169,6 @@ function deleteBook(index) {
   renderBooks();
 }
 
-// function editBook(currBook, currIndex) {
-
-//   formAdd.style.display = 'flex';
-//   btnEdit.style.display = 'block';
-//   btnEdit.value = 'edit Book';
-//   btnSubmit.style.display = 'none';
-
-//   formTitle.value = currBook.title;
-//   formAuthor.value = currBook.author;
-//   formPages.value = currBook.pages;
-//   formReadStatus.checked = currBook.read;
-
-//   btnEdit.addEventListener('click', () => {
-
-//       if(isEdited) {
-//         currBook.title = formTitle.value;
-//         currBook.author = formAuthor.value;
-//         currBook.pages = formPages.value;
-//         currBook.read = formReadStatus.checked;
-//         formAdd.style.display = 'none';
-//         console.log(currBook.id);
-//         console.log(currIndex);
-//         isEdited = false;
-//       }
-
-//       // clearFormFields();
-//       renderBooks();
-//   });
-
-// }
 
 function clearFormFields() {
   formTitle.value = '';
